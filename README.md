@@ -64,13 +64,26 @@ decision: MergeDecision = policy.handle(incoming, existing)
 - **`PassthroughPolicy`** — preserves upstream system's default behavior (UPDATE on id collision, ADD otherwise). Use as adapter default for backward compatibility.
 - **`RecencyPolicy`** — newest-wins baseline. SUPERSEDE_BY_TIME against the most-recent existing.
 
+## First LangMem integration measurement (2026-05-31)
+
+Simulated injection of `TypedMergePolicy` into LangMem's `_apply_manager_output` hook on the 60-scenario agent-merge-bench:
+
+| Adapter | Accuracy | Over-resolution | ECE |
+|---|---:|---:|---:|
+| `langmem/stock` (last-write-wins) | 0.500 | 1.000 | 0.300 |
+| `langmem/typed-merge` (policy injected) | **0.900** | **0.100** | **0.123** |
+| **Delta** | **+0.400** | **−0.900** | **−0.177** |
+
+Full report + honest caveats: [`docs/langmem-integration-2026-05-31.md`](docs/langmem-integration-2026-05-31.md). The +40pp accuracy delta is an upper bound on real production performance (held-out validation in the predecessor project crashed the same architecture to 0.650).
+
 ## Honest about state
 
 - v0.1.0-alpha. The Protocol is stable; the LLM specialist prompts are not finalized.
-- TypedMergePolicy hit 0.967 on the [synthetic agent-merge-bench](https://github.com/PJuniszewski/agent-merge-bench/blob/main/docs/v0-leaderboard.md), but the predecessor architecture **failed held-out validation in the predecessor project** (dev 1.000 → held-out 0.650). Same architecture; same caveat applies here. Treat single-bench numbers as upper bounds.
-- The library has NO integration tests against a real memory system yet. LangMem adapter is shipping in v0.1.x; until then, this is validated only via the bench's reference implementations.
+- TypedMergePolicy hit 0.967 on the [synthetic agent-merge-bench](https://github.com/PJuniszewski/agent-merge-bench/blob/main/docs/v0-leaderboard.md) (via `BenchAdapter`) and 0.900 when run through `LangMemBenchAdapter` (slight drop = adapter state→Decision mapping artifact). But the predecessor architecture **failed held-out validation in the predecessor project** (dev 1.000 → held-out 0.650). Same architecture; same caveat applies here.
+- The LangMem adapter is a SIMULATION of the merge layer (bypasses extraction). Full end-to-end `MemoryStoreManager.ainvoke()` integration is v0.2.
 - Multi-write (>2 writers) is not supported — pairwise only. v0.2 priority.
 - Only one model tested (claude-sonnet-4-6). Cross-provider (GPT, Gemini) untested.
+- Only one host (LangMem) integrated so far. Mem0, Letta, Cognee adapters are v0.2.
 
 ## License
 
