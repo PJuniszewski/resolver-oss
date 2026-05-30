@@ -1,0 +1,52 @@
+[project]
+name = "resolver-oss"
+version = "0.1.0a0"
+description = "Typed semantic conflict resolution for multi-agent memory — a pluggable merge-policy library for memory stacks like LangMem, Mem0, Letta, Cognee."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Patryk Juniszewski" }]
+keywords = ["agents", "memory", "merge", "multi-agent", "conflict-resolution", "langchain", "langmem", "mem0", "letta"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+llm = ["anthropic>=0.39"]
+langmem = ["langmem", "langgraph"]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "anthropic>=0.39",
+]
+
+[project.urls]
+"Source" = "https://github.com/PJuniszewski/resolver-oss"
+"Companion benchmark" = "https://github.com/PJuniszewski/agent-merge-bench"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/resolver_oss"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]
