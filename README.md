@@ -64,17 +64,21 @@ decision: MergeDecision = policy.handle(incoming, existing)
 - **`PassthroughPolicy`** — preserves upstream system's default behavior (UPDATE on id collision, ADD otherwise). Use as adapter default for backward compatibility.
 - **`RecencyPolicy`** — newest-wins baseline. SUPERSEDE_BY_TIME against the most-recent existing.
 
-## First LangMem integration measurement (2026-05-31)
+## Multi-adapter integration delta (2026-05-31)
 
-Simulated injection of `TypedMergePolicy` into LangMem's `_apply_manager_output` hook on the 60-scenario agent-merge-bench:
+Simulated injection of `TypedMergePolicy` into three memory-system adapters on the 60-scenario agent-merge-bench:
 
-| Adapter | Accuracy | Over-resolution | ECE |
+| Adapter | Stock | + TypedMergePolicy | Δ acc |
 |---|---:|---:|---:|
-| `langmem/stock` (last-write-wins) | 0.500 | 1.000 | 0.300 |
-| `langmem/typed-merge` (policy injected) | **0.900** | **0.100** | **0.123** |
-| **Delta** | **+0.400** | **−0.900** | **−0.177** |
+| `langmem/*` (last-write-wins default) | 0.500 | **0.900** | **+0.400** |
+| `mem0/*` (4-op LLM default ≈ recency) | 0.500 | **0.850** | **+0.350** |
+| `letta/*` (additive append default) | 0.333 | **0.900** | **+0.567** |
 
-Full report + honest caveats: [`docs/langmem-integration-2026-05-31.md`](docs/langmem-integration-2026-05-31.md). The +40pp accuracy delta is an upper bound on real production performance (held-out validation in the predecessor project crashed the same architecture to 0.650).
+**Polymorphism:** the same `TypedMergePolicy` instance lifts three architecturally distinct hosts by 35-57pp.
+
+Full cross-adapter report: [`docs/multi-adapter-leaderboard.md`](docs/multi-adapter-leaderboard.md). LangMem also has a real-`ainvoke` adapter (`LangMemE2EAdapter`) that runs the actual extraction + merge pipeline — see [`docs/langmem-integration-2026-05-31.md`](docs/langmem-integration-2026-05-31.md) for the simulated baseline + `docs/langmem-e2e-results-2026-05-31.md` for the real-pipeline numbers.
+
+The deltas are an upper bound on real production performance (held-out validation in the predecessor project crashed the same architecture to 0.650).
 
 ## Honest about state
 
