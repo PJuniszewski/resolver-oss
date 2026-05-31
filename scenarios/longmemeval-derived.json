@@ -1,0 +1,841 @@
+{
+  "scenarios": [
+    {
+      "id": "lme-0a9959-00",
+      "description": "Both statements describe the same Zara boot exchange situation; the later session restates the same fact with no new information added.",
+      "conflict_type": "duplicate",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I got boots on February 5th, they were too small, so I exchanged them for a larger size. I just haven't had a chance to pick them up yet.",
+          "timestamp": "2023-02-15T11:13:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-0a995998-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just exchanged a pair of boots I got from Zara on 2/5, and I still need to pick up the new pair.",
+          "timestamp": "2023-02-15T16:19:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-0a995998-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "Both statements describe the same Zara boot exchange situation; the later session restates the same fact with no new information added."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row 0a995998 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-b5ef89-00",
+      "description": "Both statements claim the user 'just got back' from a recent camping trip but describe different trips (Yellowstone 5-day vs. Big Sur 3-day solo in early April), making it unclear which was the most r",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got back from an amazing 5-day camping trip to Yellowstone National Park last month",
+          "timestamp": "2023-04-29T15:49:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-b5ef892d-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got back from a 3-day solo camping trip to Big Sur in early April",
+          "timestamp": "2023-04-29T20:02:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-b5ef892d-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "Both statements claim the user 'just got back' from a recent camping trip but describe different trips (Yellowstone 5-day vs. Big Sur 3-day solo in early April), making it unclear which was the most recent or if both occurred, warranting clarification."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row b5ef892d via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-e83112-00",
+      "description": "Both claims describe different movie marathon events and together paint a fuller picture of the user's recent binge-watching activity.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I watched all 22 Marvel Cinematic Universe movies in two weeks.",
+          "timestamp": "2023-05-23T23:17:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-e831120c-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just finished a Star Wars marathon, watched all the main films in a week and a half.",
+          "timestamp": "2023-05-25T21:00:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-e831120c-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I just finished a Star Wars marathon, watched all the main films in a week and a half.",
+        "rationale": "Both claims describe different movie marathon events and together paint a fuller picture of the user's recent binge-watching activity."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row e831120c via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-aae376-00",
+      "description": "These are different trips to different destinations with different drive times, representing distinct travel experiences that should both be retained.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I drove four hours to Outer Banks, North Carolina",
+          "timestamp": "2023-05-21T16:32:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-aae3761f-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I drove five hours to the mountains in Tennessee",
+          "timestamp": "2023-05-21T18:02:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-aae3761f-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I drove five hours to the mountains in Tennessee",
+        "rationale": "These are different trips to different destinations with different drive times, representing distinct travel experiences that should both be retained."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row aae3761f via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-aae376-01",
+      "description": "These are separate trips to different destinations with different drive times, each adding distinct information about the user's travel history.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I drove five hours to the mountains in Tennessee",
+          "timestamp": "2023-05-21T18:02:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-aae3761f-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I drove six hours to Washington D.C.",
+          "timestamp": "2023-05-26T16:58:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-aae3761f-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I drove six hours to Washington D.C.",
+        "rationale": "These are separate trips to different destinations with different drive times, each adding distinct information about the user's travel history."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row aae3761f via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_f-00",
+      "description": "The later statement provides more specific context about Dr. Patel's role (ENT specialist), the diagnosis (chronic sinusitis), and the reason for the nasal spray prescription.",
+      "conflict_type": "refinement",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I have a nasal spray prescription from Dr. Patel",
+          "timestamp": "2023-05-20T14:29:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_f2262a51-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got diagnosed with chronic sinusitis by an ENT specialist, Dr. Patel, and she prescribed a nasal spray",
+          "timestamp": "2023-05-22T02:06:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_f2262a51-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The later statement provides more specific context about Dr. Patel's role (ENT specialist), the diagnosis (chronic sinusitis), and the reason for the nasal spray prescription."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_f2262a51 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_f-01",
+      "description": "Both statements describe the same UTI event; the earlier statement is more specific by naming the prescribing physician, Dr. Smith.",
+      "conflict_type": "duplicate",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "my primary care physician, Dr. Smith, had diagnosed me with a UTI and prescribed antibiotics",
+          "timestamp": "2023-05-21T02:02:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_f2262a51-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I recently had a urinary tract infection and was prescribed antibiotics",
+          "timestamp": "2023-05-22T02:06:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_f2262a51-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 0,
+        "merge_summary": null,
+        "rationale": "Both statements describe the same UTI event; the earlier statement is more specific by naming the prescribing physician, Dr. Smith."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_f2262a51 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-c4a1ce-00",
+      "description": "Both statements describe upcoming party plans but refer to different events with different themes \u2014 summer cocktail party vs. Spanish dinner party \u2014 and should be retained as separate complementary fa",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I'm planning a summer party and I want to serve some refreshing cocktails.",
+          "timestamp": "2023-05-25T13:21:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-c4a1ceb8-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I'm planning a dinner party next weekend and I want to serve a Spanish-inspired menu.",
+          "timestamp": "2023-05-27T03:44:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-c4a1ceb8-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I'm planning a dinner party next weekend and I want to serve a Spanish-inspired menu.",
+        "rationale": "Both statements describe upcoming party plans but refer to different events with different themes \u2014 summer cocktail party vs. Spanish dinner party \u2014 and should be retained as separate complementary facts."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row c4a1ceb8 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-6cb6f2-00",
+      "description": "The two statements conflict on both the duration (10 days vs. one week) and the timing (mid-February vs. mid-January) of the social media break, making it impossible to determine which is correct with",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I took a 10-day break from social media in mid-February",
+          "timestamp": "2023-03-14T14:59:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-6cb6f249-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I took a week-long break from social media in mid-January",
+          "timestamp": "2023-03-14T15:01:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-6cb6f249-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "The two statements conflict on both the duration (10 days vs. one week) and the timing (mid-February vs. mid-January) of the social media break, making it impossible to determine which is correct without clarification."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row 6cb6f249 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-46a3ab-00",
+      "description": "A community tank with plants implies multiple fish/species, while the second session describes a single-fish 5-gallon betta tank \u2014 these appear to be contradictory descriptions of the same or differen",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I have a community tank with anacharis and java moss",
+          "timestamp": "2023-05-21T12:06:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-46a3abf7-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I have a 5-gallon tank with a solitary betta fish named Finley",
+          "timestamp": "2023-05-23T08:19:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-46a3abf7-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "A community tank with plants implies multiple fish/species, while the second session describes a single-fish 5-gallon betta tank \u2014 these appear to be contradictory descriptions of the same or different tanks and need clarification."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row 46a3abf7 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-36b9f6-00",
+      "description": "The later statement is a more complete and self-aware characterization of the user's spending behavior, incorporating both sides of their habits rather than only the luxury splurging trigger.",
+      "conflict_type": "refinement",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I tend to splurge on luxury items when I'm feeling stressed or celebratory",
+          "timestamp": "2023-05-24T20:23:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-36b9f61e-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I tend to swing between luxury and budget-friendly purchases",
+          "timestamp": "2023-05-28T16:24:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-36b9f61e-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The later statement is a more complete and self-aware characterization of the user's spending behavior, incorporating both sides of their habits rather than only the luxury splurging trigger."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row 36b9f61e via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-28dc39-00",
+      "description": "The more recent session contradicts both the difficulty setting and playtime, so the latest statement is taken as the authoritative account.",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I completed The Last of Us Part II on hard difficulty and it took me 30 hours to finish",
+          "timestamp": "2023-05-25T14:10:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-28dc39ac-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just finished The Last of Us Part II on normal difficulty and it took me 25 hours to complete",
+          "timestamp": "2023-05-29T00:59:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-28dc39ac-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The more recent session contradicts both the difficulty setting and playtime, so the latest statement is taken as the authoritative account."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row 28dc39ac via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_2-00",
+      "description": "The user claims to have 'just got back' from two different weddings in the same day \u2014 one a city rooftop and one a countryside barn \u2014 which are mutually exclusive as the most recent attended wedding, ",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got back from my college roommate's wedding in the city (rooftop garden ceremony)",
+          "timestamp": "2023-10-15T04:44:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2f8be40d-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got back from a friend's wedding last weekend at a rustic barn in the countryside",
+          "timestamp": "2023-10-15T19:23:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2f8be40d-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "The user claims to have 'just got back' from two different weddings in the same day \u2014 one a city rooftop and one a countryside barn \u2014 which are mutually exclusive as the most recent attended wedding, requiring clarification."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row gpt4_2f8be40d via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-2e6d26-00",
+      "description": "Both claims provide different but compatible facts about related events \u2014 Rachel's baby shower timing and a subsequent birth \u2014 that together build a fuller timeline of the user's social circle.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "My cousin Rachel just had a baby boy named Max in March, and I attended her baby shower in February",
+          "timestamp": "2023-05-13T09:18:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-2e6d26dc-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "Mike and Emma welcomed their first baby, a girl named Charlotte, a few weeks after Rachel's baby shower",
+          "timestamp": "2023-05-13T14:49:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-2e6d26dc-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "Mike and Emma welcomed their first baby, a girl named Charlotte, a few weeks after Rachel's baby shower",
+        "rationale": "Both claims provide different but compatible facts about related events \u2014 Rachel's baby shower timing and a subsequent birth \u2014 that together build a fuller timeline of the user's social circle."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row 2e6d26dc via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_1-00",
+      "description": "The second claim adds specific retailer (West Elm) and approximate purchase timing, making it strictly more informative than the first.",
+      "conflict_type": "refinement",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got a new coffee table and rearranged my living room",
+          "timestamp": "2023-05-21T03:13:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_15e38248-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got a new coffee table from West Elm about three weeks ago",
+          "timestamp": "2023-05-26T03:20:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_15e38248-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The second claim adds specific retailer (West Elm) and approximate purchase timing, making it strictly more informative than the first."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_15e38248 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-d23cf7-00",
+      "description": "Both statements reference cooking classes but different ones on different cuisines; both can be true and should be retained together.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I learned how to make a perfect chicken tikka masala in a class on Indian cuisine",
+          "timestamp": "2023-05-26T14:14:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-d23cf73b-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I recently attended a class on vegan cuisine that got me really inspired",
+          "timestamp": "2023-05-30T02:40:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-d23cf73b-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I recently attended a class on vegan cuisine that got me really inspired",
+        "rationale": "Both statements reference cooking classes but different ones on different cuisines; both can be true and should be retained together."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row d23cf73b via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_7-00",
+      "description": "Both statements describe different properties in the user's home-buying journey \u2014 a successfully negotiated townhouse and a previously rejected condo offer \u2014 and together form a fuller picture of thei",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "put in an offer on a 3-bedroom townhouse in the Brookside neighborhood, agreed on a price of $340,000",
+          "timestamp": "2023-03-08T09:32:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_7fce9456-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "fell in love with a 2-bedroom condo on February 15th, offer got rejected on the 17th due to a higher bid",
+          "timestamp": "2023-03-08T12:09:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_7fce9456-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "fell in love with a 2-bedroom condo on February 15th, offer got rejected on the 17th due to a higher bid",
+        "rationale": "Both statements describe different properties in the user's home-buying journey \u2014 a successfully negotiated townhouse and a previously rejected condo offer \u2014 and together form a fuller picture of their search history."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_7fce9456 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_7-01",
+      "description": "The user appears to have an accepted offer on a Brookside townhouse but is simultaneously exploring downtown condos, creating an ambiguous contradiction about which property they are actually purchasi",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "looking at options for condo in the downtown area",
+          "timestamp": "2023-03-08T16:03:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_7fce9456-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "put in an offer on a 3-bedroom townhouse in the Brookside neighborhood, agreed on a price of $340,000",
+          "timestamp": "2023-03-08T09:32:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_7fce9456-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "The user appears to have an accepted offer on a Brookside townhouse but is simultaneously exploring downtown condos, creating an ambiguous contradiction about which property they are actually purchasing."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row gpt4_7fce9456 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-d682f1-00",
+      "description": "The later session reflects the most current food delivery preference, superseding the earlier Domino's reliance.",
+      "conflict_type": "temporal_scope",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been relying on food delivery services a lot lately - I had Domino's Pizza three times last week",
+          "timestamp": "2023-05-22T01:26:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-d682f1a2-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been really busy lately and have been relying on food delivery services, like this new one I found called Fresh Fusion",
+          "timestamp": "2023-05-30T10:38:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-d682f1a2-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The later session reflects the most current food delivery preference, superseding the earlier Domino's reliance."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row d682f1a2 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_5-00",
+      "description": "Both statements describe follower counts on different platforms and together build a fuller picture of the user's social media presence.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "Twitter follower count has jumped from 420 to 540 over the past month",
+          "timestamp": "2023-05-29T20:51:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_5501fe77-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "Facebook follower count has remained steady at around 800",
+          "timestamp": "2023-05-30T03:15:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_5501fe77-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "Facebook follower count has remained steady at around 800",
+        "rationale": "Both statements describe follower counts on different platforms and together build a fuller picture of the user's social media presence."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_5501fe77 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_2-00",
+      "description": "Both claims reference grocery shopping 'last week' from the user's perspective but cite different stores (Walmart vs Publix via Instacart) and different amounts ($120 vs $60), making it unclear which ",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I went grocery shopping last Saturday, exactly a week ago, and spent around $120 at Walmart",
+          "timestamp": "2023-05-26T14:05:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2ba83207-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I ordered from Publix last week and spent around $60 (via Instacart)",
+          "timestamp": "2023-05-30T03:44:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2ba83207-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "escalate",
+        "winner_idx": null,
+        "merge_summary": null,
+        "rationale": "Both claims reference grocery shopping 'last week' from the user's perspective but cite different stores (Walmart vs Publix via Instacart) and different amounts ($120 vs $60), making it unclear which is accurate or if they refer to separate shopping trips."
+      },
+      "should_escalate": true,
+      "notes": "Extracted from LongMemEval-S row gpt4_2ba83207 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_2-01",
+      "description": "These describe different shopping trips at different stores during different time periods, representing complementary facets of the user's grocery shopping behavior rather than conflicting facts.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I placed an online order with Thrive Market last month and spent around $150 on organic and sustainable products",
+          "timestamp": "2023-05-26T10:17:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2ba83207-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I went grocery shopping last Saturday at Walmart and spent around $120",
+          "timestamp": "2023-05-26T14:05:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_2ba83207-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I went grocery shopping last Saturday at Walmart and spent around $120",
+        "rationale": "These describe different shopping trips at different stores during different time periods, representing complementary facets of the user's grocery shopping behavior rather than conflicting facts."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_2ba83207 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_d-00",
+      "description": "The second claim provides the exact age (32) and birthdate (February 12th), which is more specific and authoritative than the vague 'early thirties' reference.",
+      "conflict_type": "refinement",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "someone in their early thirties",
+          "timestamp": "2023-05-22T10:09:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_d12ceb0e-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just turned 32 on February 12th",
+          "timestamp": "2023-05-26T10:10:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_d12ceb0e-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The second claim provides the exact age (32) and birthdate (February 12th), which is more specific and authoritative than the vague 'early thirties' reference."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_d12ceb0e via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-00ca46-00",
+      "description": "The second claim provides a specific duration (six weeks) that refines the vague 'for weeks' in the first claim.",
+      "conflict_type": "refinement",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been dealing with this lingering cough for weeks",
+          "timestamp": "2023-03-27T00:55:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-00ca467f-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been dealing with a lingering cough for six weeks now",
+          "timestamp": "2023-03-27T20:56:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-00ca467f-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "winner",
+        "winner_idx": 1,
+        "merge_summary": null,
+        "rationale": "The second claim provides a specific duration (six weeks) that refines the vague 'for weeks' in the first claim."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row 00ca467f via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-b3c15d-00",
+      "description": "Both claims reference the same remote shutter release but give conflicting dates \u2014 one is the order date (Feb 5) and the other is the arrival date (Feb 10), which can be merged into a single coherent ",
+      "conflict_type": "contradiction",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I ordered a new remote shutter release online on February 5th, after I realized I lost my old one during a photo walk.",
+          "timestamp": "2023-03-01T00:00:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-b3c15d39-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I just got a new remote shutter release that arrived on February 10th.",
+          "timestamp": "2023-03-01T13:48:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-b3c15d39-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I just got a new remote shutter release that arrived on February 10th.",
+        "rationale": "Both claims reference the same remote shutter release but give conflicting dates \u2014 one is the order date (Feb 5) and the other is the arrival date (Feb 10), which can be merged into a single coherent fact: ordered Feb 5, arrived Feb 10."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row b3c15d39 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-gpt4_3-00",
+      "description": "Both statements describe different facets of the user's Fitbit usage (step tracking vs. guided breathing sessions) and should be merged into a complete picture of how they use the device.",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been wearing my Fitbit Versa 3 smartwatch non-stop since I got it three weeks ago, and my average steps per day have dropped lately",
+          "timestamp": "2023-05-21T23:08:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_31ff4165-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I've been trying to do at least one guided breathing session per day with my Fitbit, which has really been helping me relax",
+          "timestamp": "2023-05-27T05:31:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-gpt4_31ff4165-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I've been trying to do at least one guided breathing session per day with my Fitbit, which has really been helping me relax",
+        "rationale": "Both statements describe different facets of the user's Fitbit usage (step tracking vs. guided breathing sessions) and should be merged into a complete picture of how they use the device."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row gpt4_31ff4165 via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    },
+    {
+      "id": "lme-eeda8a-00",
+      "description": "The two statements refer to different tanks \u2014 the 20-gallon community tank and the upgraded 10-gallon betta tank \u2014 so both facts should be merged into a complete picture of the user's multiple aquariu",
+      "conflict_type": "complementary",
+      "writes": [
+        {
+          "author": "longmemeval-user",
+          "claim": "I have a new 20-gallon tank",
+          "timestamp": "2023-05-22T09:02:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-eeda8a6d-s1",
+          "confidence": 0.85
+        },
+        {
+          "author": "longmemeval-user",
+          "claim": "I upgraded my old 10-gallon tank",
+          "timestamp": "2023-05-27T04:32:00Z",
+          "evidence_kind": "user_statement",
+          "evidence_ref": "longmemeval-eeda8a6d-s2",
+          "confidence": 0.85
+        }
+      ],
+      "ground_truth": {
+        "decision_kind": "merge",
+        "winner_idx": 1,
+        "merge_summary": "I upgraded my old 10-gallon tank",
+        "rationale": "The two statements refer to different tanks \u2014 the 20-gallon community tank and the upgraded 10-gallon betta tank \u2014 so both facts should be merged into a complete picture of the user's multiple aquariums."
+      },
+      "should_escalate": false,
+      "notes": "Extracted from LongMemEval-S row eeda8a6d via sonnet-4-6 LLM extraction (see scripts/extract_from_longmemeval.py)"
+    }
+  ]
+}

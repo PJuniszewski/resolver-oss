@@ -64,33 +64,35 @@ decision: MergeDecision = policy.handle(incoming, existing)
 - **`PassthroughPolicy`** — preserves upstream system's default behavior (UPDATE on id collision, ADD otherwise). Use as adapter default for backward compatibility.
 - **`RecencyPolicy`** — newest-wins baseline. SUPERSEDE_BY_TIME against the most-recent existing.
 
-## Multi-adapter integration delta (2026-05-31)
+## ⚠️ Honest verdict (2026-05-31): TypedMergePolicy does NOT generalize
 
-Simulated injection of `TypedMergePolicy` into three memory-system adapters on the 60-scenario agent-merge-bench:
+**Three independent measurements converged: TypedMergePolicy loses to recency on real data.** Full writeup: [`docs/HONEST-VERDICT-2026-05-31.md`](docs/HONEST-VERDICT-2026-05-31.md).
 
-| Adapter | Stock | + TypedMergePolicy | Δ acc |
-|---|---:|---:|---:|
-| `langmem/*` (last-write-wins default) | 0.500 | **0.900** | **+0.400** |
-| `mem0/*` (4-op LLM default ≈ recency) | 0.500 | **0.850** | **+0.350** |
-| `letta/*` (additive append default) | 0.333 | **0.900** | **+0.567** |
+| Measurement | Verdict |
+|---|---|
+| Predecessor project held-out (2026-05-30) | 1.000 dev → **0.650** real-data held-out (−35pp) |
+| Full 60-scen agent-merge-bench × LangMem real `ainvoke` | stock 0.567 → typed **0.517** (−5pp, typed LOSES) |
+| 27-scen real-data bench (LongMemEval-S extracted) | recency 0.778 vs typed **0.407** (recency beats typed by **+37pp**) |
 
-**Polymorphism:** the same `TypedMergePolicy` instance lifts three architecturally distinct hosts by 35-57pp.
+The simulated +40pp deltas previously reported in this README **do not survive real-pipeline + real-data validation.** TypedMergePolicy's deterministic escalation on COMPLEMENTARY/TEMPORAL_SCOPE — which dominated the synthetic bench distribution — over-escalates on real data where the same patterns more often have a clear winner.
 
-Full cross-adapter report: [`docs/multi-adapter-leaderboard.md`](docs/multi-adapter-leaderboard.md).
+### What ships honestly
 
-### End-to-end LangMem (real `ainvoke`)
+| Component | Status |
+|---|---|
+| `MergePolicy` Protocol + `MemoryWrite` / `MergeDecision` dataclasses | ✅ correct and reusable |
+| `PassthroughPolicy`, `RecencyPolicy` | ✅ correct reference implementations |
+| `TypedMergePolicy` | ⚠️ **reference impl with documented failure mode; not recommended for production.** Better to call `RecencyPolicy()` until a successor architecture is built. |
+| 5 adapters (BenchAdapter, LangMemBenchAdapter, LangMemE2EAdapter, Mem0BenchAdapter, LettaBenchAdapter) | ✅ adapter pattern proven across 3 hosts |
+| Real-data extraction script (`scripts/extract_from_longmemeval.py`) | ✅ replicable; 30 rows → 27 scenarios → $2 |
+| The MERGE-POLICY-AS-PLUGIN hypothesis | ✅ proven — the hook is load-bearing infrastructure |
+| The SPECIFIC POLICY shipped | ❌ does not beat recency on real data |
 
-`LangMemE2EAdapter` runs the FULL `MemoryStoreManager.ainvoke()` pipeline (real trustcall extraction + retrieval + merge), with monkey-patched `_apply_manager_output` for typed mode. Measured on a 10-scenario stratified sample:
+### Why this matters more than the loss
 
-| Mode | Accuracy | Over-res | ECE |
-|---|---:|---:|---:|
-| `langmem-e2e/stock` | 0.400 | 1.000 | 0.256 |
-| `langmem-e2e/typed-merge` | **0.700** | 0.500 | **0.075** |
-| Δ | **+0.300** | −0.500 | −0.181 |
+This is **research-grade convergent evidence** for a methodology lesson: architectures tuned implicitly against a synthetic bench overstate their benefit. Repeated, on a public dataset, across three independent adapter targets. It's the resolver-internal predecessor's failure mode reproduced with public artifacts — useful as a cautionary case study in any future memory-merge work.
 
-**Honest finding:** the e2e delta (+30pp) is SMALLER than the simulation predicted (+40pp). The simulation was optimistic; real extraction adds noise and the ESCALATE-marker semantics don't fully survive trustcall. **Direction is preserved; magnitude is smaller.** Full writeup: [`docs/langmem-e2e-results-2026-05-31.md`](docs/langmem-e2e-results-2026-05-31.md). Full 60-scenario run deferred to v0.2 ($15-25 cost; n=10 already confirms direction).
-
-The deltas are an upper bound on real production performance (held-out validation in the predecessor project crashed the same architecture to 0.650).
+The Protocol, harness, adapters, real-data extraction, and methodology survive. The included default policy does not. Both ship honestly.
 
 ## Honest about state
 
