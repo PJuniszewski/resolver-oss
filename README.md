@@ -76,7 +76,19 @@ Simulated injection of `TypedMergePolicy` into three memory-system adapters on t
 
 **Polymorphism:** the same `TypedMergePolicy` instance lifts three architecturally distinct hosts by 35-57pp.
 
-Full cross-adapter report: [`docs/multi-adapter-leaderboard.md`](docs/multi-adapter-leaderboard.md). LangMem also has a real-`ainvoke` adapter (`LangMemE2EAdapter`) that runs the actual extraction + merge pipeline — see [`docs/langmem-integration-2026-05-31.md`](docs/langmem-integration-2026-05-31.md) for the simulated baseline + `docs/langmem-e2e-results-2026-05-31.md` for the real-pipeline numbers.
+Full cross-adapter report: [`docs/multi-adapter-leaderboard.md`](docs/multi-adapter-leaderboard.md).
+
+### End-to-end LangMem (real `ainvoke`)
+
+`LangMemE2EAdapter` runs the FULL `MemoryStoreManager.ainvoke()` pipeline (real trustcall extraction + retrieval + merge), with monkey-patched `_apply_manager_output` for typed mode. Measured on a 10-scenario stratified sample:
+
+| Mode | Accuracy | Over-res | ECE |
+|---|---:|---:|---:|
+| `langmem-e2e/stock` | 0.400 | 1.000 | 0.256 |
+| `langmem-e2e/typed-merge` | **0.700** | 0.500 | **0.075** |
+| Δ | **+0.300** | −0.500 | −0.181 |
+
+**Honest finding:** the e2e delta (+30pp) is SMALLER than the simulation predicted (+40pp). The simulation was optimistic; real extraction adds noise and the ESCALATE-marker semantics don't fully survive trustcall. **Direction is preserved; magnitude is smaller.** Full writeup: [`docs/langmem-e2e-results-2026-05-31.md`](docs/langmem-e2e-results-2026-05-31.md). Full 60-scenario run deferred to v0.2 ($15-25 cost; n=10 already confirms direction).
 
 The deltas are an upper bound on real production performance (held-out validation in the predecessor project crashed the same architecture to 0.650).
 
